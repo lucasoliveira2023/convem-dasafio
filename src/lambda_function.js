@@ -1,28 +1,33 @@
 // passo 3
-const AWS = require('aws-sdk');
+const {SQSClient, SendMessageCommand} = require('@aws-sdk/client-sqs');
+const  { DynamoDBClient, PutItemCommand} = require ('@aws-sdk/client-dynamodb');
 
-const sqs = new AWS.SQS({region:''}); //aqui vc coloca sua região
-const dynamodb = new AWS.DynamoDB.DocumentClient();
+const sqs = new SQSClient({region: 'YOU REGION'}); // SUBSTITUA PELA SUA REGIÃO
+const dynamodb = new DynamoDBClient();
 
 
 exports.handle = async (event) => {
-    try{
+    try {
         for (const record of event.Records){
             const body = JSON.parse(record.body);
-
-            //salva os dados da transação no dynamoDB
-            await dynamoDB.put({
-                TableName: 'nome_da_sua-tabela_no_dynamo_db',// não consegui ter acesso ao banco de dados do dynamo_db, mas ao acessa-lo é so sustituir o nome da tabela dele aqui nesse trcho de codigo
-                item: {
-                    id: record.massage.ID, 
-                    data: body
-                }
-            }).promisse();
+            await saveToDynamoDB(record.messageId, body);
         }
-        return { statusCode: 200, body: 'Mensagens processadas com sucesso'};
+        return {statusCode: 200, body: 'Messagens processadas comsucesso'};
     } catch (error) {
-        console.error('Erro ao processar mensagens:', error);
-        return { statusCode: 500, body: 'Erro interno ao processar mensagens'};
+        console.error('error ao processar mensagens', error);
     }
 };
 
+async function saveToDynamoDB(ID, BODY){
+    try {
+        await dynamodb.send(new PutItemCommand({
+            TableName: 'nomedatabela', //substitua aqui o nome da sua tabela
+            item: {
+                id: { S: id},
+                data: {S: JSON.stringify(body)}
+            }
+        }));
+    } catch (error) {
+        console.error('Erro ao salvar no DynamoDB:', error);
+    }
+}

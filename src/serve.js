@@ -42,7 +42,7 @@ rl.question('Digite sua chave de acesso id:', (AWS_ACCESS_KEY_ID) => {
             
             const params = {
                 MessageBody: JSON.stringify(transictionData),
-                queueUrl: 'coloque aqui a url da fila de teste', 
+                QueueUrl: '',  //coloque aqui a url da fila de teste
             };
 
             try {
