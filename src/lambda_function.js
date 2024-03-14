@@ -1,7 +1,7 @@
 // passo 3
 const AWS = require('aws-sdk');
 
-const sqs = new AWS.SQS({region:'sa-east-1'}); //aqui vc coloca sua região
+const sqs = new AWS.SQS({region:''}); //aqui vc coloca sua região
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 

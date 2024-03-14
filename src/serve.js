@@ -42,7 +42,7 @@ rl.question('Digite sua chave de acesso id:', (AWS_ACCESS_KEY_ID) => {
             
             const params = {
                 MessageBody: JSON.stringify(transictionData),
-                queueUrl: 'substitua aqui pela URL_DA_SUA_FILA_SQS', 
+                queueUrl: 'coloque aqui a url da fila de teste', 
             };
 
             try {
@@ -57,7 +57,7 @@ rl.question('Digite sua chave de acesso id:', (AWS_ACCESS_KEY_ID) => {
         });
 
         app.listen(PORT, () => {
-            console.log(`Server is running on http://localhost:${PORT}`);
+            console.log(`Server is running on http://localhost:${PORT}/transiction`);
         });
 
         
