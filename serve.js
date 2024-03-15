@@ -47,7 +47,7 @@ rl.question('Digite sua chave de acesso id:', (AWS_ACCESS_KEY_ID) => {
 
             try {
                 const data = await sqs.sendMessage(params).promise();
-                console.log('Mensagwm enviada para a fila SQS:', data.MessageId);
+                console.log('Mensagem enviada para a fila SQS:', data.MessageId);
                 res.status(201).json({ message: 'transação recebida e enviada para a fila sqs com sucesso'})
             } catch (error){
                 console.error('error ao enviar mensagem para a fila SQS:', error);

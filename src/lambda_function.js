@@ -3,7 +3,7 @@ const {SQSClient, SendMessageCommand} = require('@aws-sdk/client-sqs');
 const  { DynamoDBClient, PutItemCommand} = require ('@aws-sdk/client-dynamodb');
 
 const sqs = new SQSClient({region: 'YOU REGION'}); // SUBSTITUA PELA SUA REGIÃO
-const dynamodb = new DynamoDBClient();
+const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 
 exports.handle = async (event) => {

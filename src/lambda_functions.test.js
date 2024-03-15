@@ -10,7 +10,7 @@ describe('handle', ()=> {
 
         const result = await handle(event);
         expect(result.statusCode).toEqual(200);
-        expect(result.body).toEqual('Mesagens processadas com sucesso');
+        expect(result.body).toEqual('Mensagens processadas com sucesso');
     });
 
     test('should handle errors gracefully', async() => {
