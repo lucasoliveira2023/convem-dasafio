@@ -1,4 +1,4 @@
-const {handle} = require('./lambda.function');
+const {handle} = require('./lambda_function');
 
 describe('handle', ()=> {
     test('deveria processar SQS mensagens e salvar no dynamoDB', async () =>{
